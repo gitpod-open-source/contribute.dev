@@ -6,15 +6,18 @@ import Plane from '../resources/plane.svg'
 import { colors } from '../utils/variables'
 
 const StyledNav = styled.div`
-    background: ${colors.offWhite};
-    position: relative;
+    position: fixed;
+    width: 100%;
     z-index: 1000;
-
+    border-bottom: 1px solid ${colors.offWhite2};
+    background: hsl(0 5% 96% / 85%);
+    backdrop-filter: saturate(0.5) blur(5px);
+    
     nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 6rem 0;
+        padding: 1.5rem 0;
     }
 
     .logo {
@@ -39,8 +42,8 @@ const Nav = () => (
                     to='/'
                     className="logo"
                 ><img src={Plane} alt="Plance" /> contribute.dev</Link>
-                <a 
-                    href="#add-my-project" 
+                <a
+                    href="#add-my-project"
                     className="btn"
                 >
                     Add My Project

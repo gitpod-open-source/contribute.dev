@@ -2,20 +2,23 @@ import React from 'react'
 import styled from '@emotion/styled'
 import GitHubMark from '../resources/githubmark.png'
 import GitLabMark from '../resources/gitlabmark.svg'
-import GitpodLogo from '../resources/gitpod.png'
 import GitpodButton from '../resources/open-in-gitpod.svg'
-import { breakpoints, colors } from '../utils/variables.js'
+import { breakpoints, colors, radiuses, shadows } from '../utils/variables.js'
 
 const Styled = styled.div`
     position: relative;
     display: flex;
     font-size: 1.6rem;
     padding: 4rem 2rem 2rem;
-    border: 2px solid ${colors.offWhite2};
-    border-radius: 3px;
+    border-radius: ${radiuses.normal};
+    background: ${colors.white};
+    box-shadow: ${shadows.normal};
 
     @media(max-width: ${breakpoints.md}) {
         flex-direction: column;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     @media(max-width: ${breakpoints.sm}) {
@@ -39,12 +42,16 @@ const Styled = styled.div`
             height: 7rem;
             
             @media(max-width: ${breakpoints.sm}) {
-                max-width: 20rem;
+                max-width: 22rem;
             }
         }
 
         @media(max-width: ${breakpoints.md}) {
             margin-bottom: 2rem;
+
+            .img {
+                max-width: 14rem;
+            }
         }
 
         @media(max-width: ${breakpoints.sm}) {
@@ -94,6 +101,8 @@ const Styled = styled.div`
 
     h3 {
         margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
 
         & img {
             height: 1.8rem;
@@ -165,7 +174,7 @@ const Styled = styled.div`
 
 const importAll = (r) => {
     let icons = {}
-    r.keys().map((item, index) => { icons[item.replace('./', '')] = r(item) })
+    r.keys().map((item) => { icons[item.replace('./', '')] = r(item) })
     return icons
 }
 
@@ -204,7 +213,7 @@ const Project = (props) => {
                 {
                     (props.tags || (platform === 'github' && [{
                         href: `${url}/graphs/contributors`,
-                        src: `https://img.shields.io/github/contributors/${repoName}.svg?style=flat-square`,
+                        src: `https://img.shields.io/github/contributors/${repoName}.svg`,
                         alt: `Contributors Count`
                     }] || [])).map((tag, i) =>
                         <a href={tag.href} key={i} aria-label={tag.alt}>
